@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
     steps:
       - uses: actions/checkout@v4
 
@@ -17,8 +20,15 @@ jobs:
         run: |
           . /home/runner/.nix-profile/etc/profile.d/nix.sh
           nix --experimental-features 'nix-command flakes' build .#packages.x86_64-linux.default
+
       - name: Upload Artifact
+        id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifact-$(date +%s)
+          name: iosevka-wl-artifact
           path: result
+
+      - uses: actions/attest-build-provenance@v3
+        with:
+          subject-name: iosevka-wl-artifact
+          subject-digest: sha256:${{ steps.upload.outputs.artifact-digest }}
