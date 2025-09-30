@@ -23,6 +23,7 @@
                   capital-q = "detached-bend-tailed";
                   g = "double-storey";
                   l = "tailed-serifed";
+                  y = "straight-turn-serifless";
                   one = "base";
                   number-sign = "slanted";
                   at = "fourfold-tall";
