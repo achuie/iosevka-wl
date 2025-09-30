@@ -69,7 +69,7 @@
                 ];
               };
             };
-            set = "whiteletter";
+            set = "Whiteletter";
           };
         });
     };
